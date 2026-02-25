@@ -47,7 +47,7 @@ class UserServiceTest {
 
         userResponseDTO = new UserResponseDTO(1L, "username", "user@email.com");
         createUserDTO = new CreateUserDTO("username", "user@email.com", "password123");
-        updateUserDTO = new UpdateUserDTO("username", "user@email.com", "password123");
+        updateUserDTO = new UpdateUserDTO("newusername", "newuser@email.com", "newpassword123");
     }
 
     @Nested
@@ -150,6 +150,7 @@ class UserServiceTest {
         @DisplayName("Should update user when ID is valid")
         void shouldUpdateUserWhenIDIsValid() {
             // Arrange
+            userResponseDTO = new UserResponseDTO(1L, "newusername", "newuser@email.com");
             Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(user));
             Mockito.doNothing().when(userMapper).updateUserFromDTO(updateUserDTO, user);
             Mockito.when(userRepository.save(user)).thenReturn(user);
@@ -161,8 +162,8 @@ class UserServiceTest {
             // Assert
             Assertions.assertNotNull(result);
             Assertions.assertEquals(1L, result.id());
-            Assertions.assertEquals("username", result.username());
-            Assertions.assertEquals("user@email.com", result.email());
+            Assertions.assertEquals("newusername", result.username());
+            Assertions.assertEquals("newuser@email.com", result.email());
 
             Mockito.verify(userRepository).findById(1L);
             Mockito.verify(userMapper).updateUserFromDTO(updateUserDTO, user);
