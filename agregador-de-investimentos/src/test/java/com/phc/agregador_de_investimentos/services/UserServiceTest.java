@@ -165,6 +165,7 @@ class UserServiceTest {
             Assertions.assertEquals("newusername", result.username());
             Assertions.assertEquals("newuser@email.com", result.email());
 
+
             Mockito.verify(userRepository).findById(1L);
             Mockito.verify(userMapper).updateUserFromDTO(updateUserDTO, user);
             Mockito.verify(userRepository).save(user);

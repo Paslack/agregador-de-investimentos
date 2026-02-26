@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-02-24T17:00:06-0300",
+    date = "2026-02-26T12:13:34-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
@@ -53,6 +53,16 @@ public class UserMapperImpl implements UserMapper {
     public void updateUserFromDTO(UpdateUserDTO dto, User user) {
         if ( dto == null ) {
             return;
+        }
+
+        if ( dto.getUsername() != null ) {
+            user.setUsername( dto.getUsername() );
+        }
+        if ( dto.getEmail() != null ) {
+            user.setEmail( dto.getEmail() );
+        }
+        if ( dto.getPassword() != null ) {
+            user.setPassword( dto.getPassword() );
         }
     }
 }
