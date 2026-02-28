@@ -1,8 +1,6 @@
 package com.phc.agregador_de_investimentos.controller;
 
-import com.phc.agregador_de_investimentos.dtos.CreateUserDTO;
-import com.phc.agregador_de_investimentos.dtos.UpdateUserDTO;
-import com.phc.agregador_de_investimentos.dtos.UserResponseDTO;
+import com.phc.agregador_de_investimentos.dtos.*;
 import com.phc.agregador_de_investimentos.entities.User;
 import com.phc.agregador_de_investimentos.services.UserService;
 import jakarta.validation.Valid;
@@ -35,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok().body(userService.findUserById(id));
     }
 
@@ -54,4 +52,15 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{userId}/accounts")
+    public ResponseEntity<AccountResponseDTO> createAccount(@PathVariable Long userId, @RequestBody @Valid CreateAccountDTO dto) {
+        return ResponseEntity.ok().body(userService.createAccount(userId, dto));
+    }
+
+    @GetMapping("/{userId}/accounts")
+    public ResponseEntity<List<AccountResponseDTO>> listAccounts(@PathVariable Long userId) {
+        return ResponseEntity.ok().body(userService.listAccounts(userId));
+    }
+
 }

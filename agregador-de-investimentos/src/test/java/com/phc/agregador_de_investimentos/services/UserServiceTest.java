@@ -86,11 +86,11 @@ class UserServiceTest {
             Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
             // Act
-            User result = userService.findUserById(1L);
+            UserResponseDTO result = userService.findUserById(1L);
 
             // Assert
             Assertions.assertNotNull(result);
-            Assertions.assertEquals(1L, result.getId());
+            Assertions.assertEquals(1L, result.id());
             Mockito.verify(userRepository).findById(1L);
         }
 

@@ -19,6 +19,6 @@ public interface UserMapper {
 
     // "Se algum campo vier vazio (null), não mexa nele, deixa como estava."
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    // "Pega os dados novos (UpdateUserDTO) e aplica em cima de um User que já existe."
     void updateUserFromDTO(UpdateUserDTO dto, @MappingTarget User user);
+
 }
