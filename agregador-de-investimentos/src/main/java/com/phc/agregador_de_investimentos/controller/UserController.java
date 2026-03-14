@@ -5,6 +5,7 @@ import com.phc.agregador_de_investimentos.entities.User;
 import com.phc.agregador_de_investimentos.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -38,6 +39,7 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         return ResponseEntity.ok().body(userService.findAllUsers());
     }
@@ -48,6 +50,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteUserById(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
